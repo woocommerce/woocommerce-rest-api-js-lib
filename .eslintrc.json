@@ -16,5 +16,9 @@
         "sourceType": "module"
     },
     "rules": {
+      "indent": [
+        2,
+        2
+      ]
     }
 }

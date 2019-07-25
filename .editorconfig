@@ -3,10 +3,16 @@ root = true
 [*]
 end_of_line = lf
 indent_style = space
-indent_size = 4
+indent_size = 2
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
 [*.md]
 trim_trailing_whitespace = false
+
+[*.{json,yml}]
+insert_final_newline = false
+
+[.babelrc]
+insert_final_newline = false
