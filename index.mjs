@@ -46,10 +46,9 @@ export default class WooCommerceAPI {
    */
   _setDefaultsOptions(opt) {
     this.url             = opt.url;
-    this.wpAPI           = opt.wpAPI || false;
     this.wpAPIPrefix     = opt.wpAPIPrefix || 'wp-json';
     this.version         = opt.version || 'v3';
-    this.isSsl           = /^https/i.test(this.url);
+    this.isHttps         = /^https/i.test(this.url);
     this.consumerKey     = opt.consumerKey;
     this.consumerSecret  = opt.consumerSecret;
     this.verifySsl       = opt.verifySsl || true;
@@ -102,7 +101,7 @@ export default class WooCommerceAPI {
    * @return {String}
    */
   _getUrl(endpoint) {
-    const api = this.wpAPI ? this.wpAPIPrefix + '/' : 'wc-api/';
+    const api = this.wpAPIPrefix + '/';
 
     let url = this.url.slice(-1) === '/' ? this.url : this.url + '/';
 
@@ -115,7 +114,7 @@ export default class WooCommerceAPI {
       url = url.replace(hostname, hostname + ':' + this.port);
     }
 
-    if (!this.isSsl) {
+    if (!this.isHttps) {
       return this._normalizeQueryString(url);
     }
 
@@ -170,7 +169,7 @@ export default class WooCommerceAPI {
       }
     };
 
-    if (this.isSsl) {
+    if (this.isHttps) {
       if (this.queryStringAuth) {
         options.params = {
           consumer_key: this.consumerKey,
