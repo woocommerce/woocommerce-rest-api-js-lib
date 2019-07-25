@@ -90,7 +90,7 @@ export default class WooCommerceAPI {
    */
   _normalizeQueryString(url, params) {
     // Exit if don't find query string.
-    if (url.indexOf('?') === -1 && params.length === 0) {
+    if (url.indexOf('?') === -1 && !params.length) {
       return url;
     }
 
