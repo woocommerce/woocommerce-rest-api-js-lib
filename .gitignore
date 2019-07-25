@@ -1,3 +1,4 @@
 node_modules
 coverage
-run.js
+run.*
+index.js

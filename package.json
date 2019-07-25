@@ -17,12 +17,17 @@
   "bugs": {
     "url": "https://github.com/woocommerce/woocommerce-rest-api-js/issues"
   },
-  "main": "src/index",
+  "main": "index",
   "dependencies": {
-    "oauth-1.0a": "^2.2.6",
-    "request": "^2.88.0"
+    "axios": "^0.19.0",
+    "create-hmac": "^1.1.7",
+    "oauth-1.0a": "^2.2.6"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.5.0",
+    "babel-plugin-add-module-exports": "^1.0.2",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-standard": "^13.0.1",
@@ -34,6 +39,10 @@
     "husky": "^3.0.1",
     "lint-staged": "^9.2.0",
     "prettier": "^1.18.2"
+  },
+  "scripts": {
+    "lint": "eslint --ext=js",
+    "build": "rm index.js && babel index.mjs --out-dir ."
   },
   "husky": {
     "hooks": {
