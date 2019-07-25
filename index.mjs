@@ -138,10 +138,6 @@ export default class WooCommerceAPI {
       }
     };
 
-    if ([ 'v1', 'v2' ].indexOf(this.version) > -1) {
-      data.last_ampersand = false;
-    }
-
     return new OAuth(data);
   }
 
