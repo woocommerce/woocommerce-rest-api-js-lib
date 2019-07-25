@@ -3,7 +3,6 @@
 import axios from 'axios';
 import createHmac from 'create-hmac';
 import OAuth from 'oauth-1.0a';
-import _url from 'url';
 
 /**
  * WooCommerce REST API wrapper
@@ -72,14 +71,14 @@ export default class WooCommerceAPI {
             return url;
         }
 
-        const query  = _url.URL(url, true).query;
+        const query  = new URL(url).searchParams;
         const params = [];
 
         let queryString = '';
 
-        for (const p in query) {
-            params.push(p);
-        }
+        query.forEach(function(value, key) {
+            params.push(key);
+        });
         params.sort();
 
         for (const i in params) {
@@ -89,7 +88,7 @@ export default class WooCommerceAPI {
 
             queryString += encodeURIComponent(params[i]).replace('%5B', '[').replace('%5D', ']');
             queryString += '=';
-            queryString += encodeURIComponent(query[params[i]]);
+            queryString += encodeURIComponent(query.get(params[i]));
         }
 
         return url.split('?')[0] + '?' + queryString;
@@ -111,7 +110,7 @@ export default class WooCommerceAPI {
 
         // Include port.
         if (this.port !== '') {
-            const hostname = _url.URL(url, true).hostname;
+            const hostname = new URL(url).hostname;
 
             url = url.replace(hostname, hostname + ':' + this.port);
         }
