@@ -28,6 +28,7 @@
     "@babel/core": "^7.5.5",
     "@babel/plugin-transform-modules-commonjs": "^7.5.0",
     "babel-plugin-add-module-exports": "^1.0.2",
+    "del-cli": "^2.0.0",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-standard": "^13.0.1",
@@ -41,8 +42,8 @@
     "prettier": "^1.18.2"
   },
   "scripts": {
-    "lint": "eslint --ext=js",
-    "build": "rm index.js && babel index.mjs --out-dir ."
+    "lint": "eslint",
+    "build": "del index.js && babel index.mjs --out-dir ."
   },
   "husky": {
     "hooks": {
