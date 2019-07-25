@@ -56,38 +56,65 @@ export default class WooCommerceAPI {
     this.queryStringAuth = opt.queryStringAuth || false;
     this.port            = opt.port || '';
     this.timeout         = opt.timeout;
+    this.axiosOptions    = opt.axiosOptions || {};
+  }
+
+  /**
+   * Parse params object.
+   *
+   * @param {String} params
+   * @param {URLSearchParams} searchParams
+   */
+  _parseParamsObject(params, searchParams) {
+    for (const key in params) {
+      const value = params[key];
+
+      if (typeof value === 'object') {
+        // parseParamsObject(value, searchParams);
+        for (const prop in value) {
+          searchParams.set(key.toString() + "[" + prop.toString() + "]", value[prop]);
+        }
+      } else {
+        searchParams.set(key, value);
+      }
+    }
   }
 
   /**
    * Normalize query string for oAuth
    *
-   * @param  {string} url
-   * @return {string}
+   * @param  {String} url
+   * @param  {Object} params
+   *
+   * @return {String}
    */
-  _normalizeQueryString(url) {
+  _normalizeQueryString(url, params) {
     // Exit if don't find query string.
-    if (url.indexOf('?') === -1) {
+    if (url.indexOf('?') === -1 && params.length === 0) {
       return url;
     }
 
     const query  = new URL(url).searchParams;
-    const params = [];
+    const values = [];
 
     let queryString = '';
 
-    query.forEach(function(value, key) {
-      params.push(key);
-    });
-    params.sort();
+    // Include params object into URL.searchParams.
+    this._parseParamsObject(params, query);
 
-    for (const i in params) {
+    query.forEach(function(value, key) {
+      values.push(key);
+    });
+    values.sort();
+
+    for (const i in values) {
       if (queryString.length) {
         queryString += '&';
       }
 
-      queryString += encodeURIComponent(params[i]).replace(/%5B/g, '[').replace(/%5D/g, ']');
+      queryString += encodeURIComponent(values[i]).replace(/%5B/g, '[').replace(/%5D/g, ']');
       queryString += '=';
-      queryString += encodeURIComponent(query.get(params[i]));
+      queryString += encodeURIComponent(query.get(values[i]));
     }
 
     return url.split('?')[0] + '?' + queryString;
@@ -97,10 +124,11 @@ export default class WooCommerceAPI {
    * Get URL
    *
    * @param  {String} endpoint
+   * @param  {Object} params
    *
    * @return {String}
    */
-  _getUrl(endpoint) {
+  _getUrl(endpoint, params) {
     const api = this.wpAPIPrefix + '/';
 
     let url = this.url.slice(-1) === '/' ? this.url : this.url + '/';
@@ -114,8 +142,9 @@ export default class WooCommerceAPI {
       url = url.replace(hostname, hostname + ':' + this.port);
     }
 
+
     if (!this.isHttps) {
-      return this._normalizeQueryString(url);
+      return this._normalizeQueryString(url, params);
     }
 
     return url;
@@ -147,13 +176,14 @@ export default class WooCommerceAPI {
    * @param  {String} method
    * @param  {String} endpoint
    * @param  {Object} data
+   * @param  {Object} params
    *
    * @return {Object}
    */
-  _request(method, endpoint, data) {
-    const url = this._getUrl(endpoint);
+  _request(method, endpoint, data, params = {}) {
+    const url = this._getUrl(endpoint, params);
 
-    const options = {
+    let options = {
       url: url,
       method: method,
       responseEncoding: this.encoding,
@@ -178,6 +208,8 @@ export default class WooCommerceAPI {
         };
       }
 
+      options.params = {...options.params, ...params}
+
       if (!this.verifySsl) {
         options.strictSSL = false;
       }
@@ -193,6 +225,9 @@ export default class WooCommerceAPI {
       options.data = JSON.stringify(data);
     }
 
+    // Allow set and override Axios options.
+    options = {...options, ...this.axiosOptions};
+
     return axios(options);
   }
 
@@ -200,11 +235,12 @@ export default class WooCommerceAPI {
    * GET requests
    *
    * @param  {String} endpoint
+   * @param  {Object} params
    *
    * @return {Object}
    */
-  get(endpoint) {
-    return this._request('get', endpoint, null);
+  get(endpoint, params = {}) {
+    return this._request('get', endpoint, null, params);
   }
 
   /**
@@ -212,11 +248,12 @@ export default class WooCommerceAPI {
    *
    * @param  {String} endpoint
    * @param  {Object} data
+   * @param  {Object} params
    *
    * @return {Object}
    */
-  post(endpoint, data) {
-    return this._request('post', endpoint, data);
+  post(endpoint, data, params = {}) {
+    return this._request('post', endpoint, data, params);
   }
 
   /**
@@ -224,32 +261,36 @@ export default class WooCommerceAPI {
    *
    * @param  {String} endpoint
    * @param  {Object} data
+   * @param  {Object} params
    *
    * @return {Object}
    */
-  put(endpoint, data) {
-    return this._request('put', endpoint, data);
+  put(endpoint, data, params = {}) {
+    return this._request('put', endpoint, data, params);
   }
 
   /**
    * DELETE requests
    *
    * @param  {String} endpoint
+   * @param  {Object} params
+   * @param  {Object} params
    *
    * @return {Object}
    */
-  delete(endpoint) {
-    return this._request('delete', endpoint, null);
+  delete(endpoint, params = {}) {
+    return this._request('delete', endpoint, null, params);
   }
 
   /**
    * OPTIONS requests
    *
    * @param  {String} endpoint
+   * @param  {Object} params
    *
    * @return {Object}
    */
-  options(endpoint) {
-    return this._request('options', endpoint, null);
+  options(endpoint, params = {}) {
+    return this._request('options', endpoint, null, params);
   }
 }
