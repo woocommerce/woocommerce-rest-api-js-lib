@@ -23,15 +23,15 @@ export default class WooCommerceRestApi {
     opt = opt || {};
 
     if (!opt.url) {
-      throw new Error("url is required");
+      throw new OptionsException("url is required");
     }
 
     if (!opt.consumerKey) {
-      throw new Error("consumerKey is required");
+      throw new OptionsException("consumerKey is required");
     }
 
     if (!opt.consumerSecret) {
-      throw new Error("consumerSecret is required");
+      throw new OptionsException("consumerSecret is required");
     }
 
     this.classVersion = "0.0.1";
@@ -46,7 +46,7 @@ export default class WooCommerceRestApi {
   _setDefaultsOptions(opt) {
     this.url = opt.url;
     this.wpAPIPrefix = opt.wpAPIPrefix || "wp-json";
-    this.version = opt.version || "v3";
+    this.version = opt.version || "wc/v3";
     this.isHttps = /^https/i.test(this.url);
     this.consumerKey = opt.consumerKey;
     this.consumerSecret = opt.consumerSecret;
@@ -104,7 +104,7 @@ export default class WooCommerceRestApi {
     // Include params object into URL.searchParams.
     this._parseParamsObject(params, query);
 
-    query.forEach(function(value, key) {
+    query.forEach((value, key) => {
       values.push(key);
     });
     values.sort();
@@ -165,7 +165,7 @@ export default class WooCommerceRestApi {
         secret: this.consumerSecret
       },
       signature_method: "HMAC-SHA256",
-      hash_function: function(base, key) {
+      hash_function: (base, key) => {
         return createHmac("sha256", key)
           .update(base)
           .digest("base64");
@@ -297,5 +297,20 @@ export default class WooCommerceRestApi {
    */
   options(endpoint, params = {}) {
     return this._request("options", endpoint, null, params);
+  }
+}
+
+/**
+ * Options Exception.
+ */
+export class OptionsException {
+  /**
+   * Constructor.
+   *
+   * @param {String} message
+   */
+  constructor(message) {
+    this.name = "Options Error";
+    this.message = message;
   }
 }
