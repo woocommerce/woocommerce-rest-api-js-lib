@@ -10,7 +10,6 @@
     ]
   ],
   "plugins": [
-    "@babel/plugin-transform-modules-commonjs",
-    "add-module-exports"
+    "@babel/plugin-transform-modules-commonjs"
   ]
 }
