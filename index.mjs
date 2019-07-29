@@ -3,6 +3,7 @@
 import axios from "axios";
 import createHmac from "create-hmac";
 import OAuth from "oauth-1.0a";
+import Url from "url-parse";
 
 /**
  * WooCommerce REST API wrapper
@@ -61,25 +62,24 @@ export default class WooCommerceRestApi {
   /**
    * Parse params object.
    *
-   * @param {String} params
-   * @param {URLSearchParams} searchParams
+   * @param {Object} params
+   * @param {Object} query
    */
-  _parseParamsObject(params, searchParams) {
+  _parseParamsObject(params, query) {
     for (const key in params) {
       const value = params[key];
 
       if (typeof value === "object") {
-        // parseParamsObject(value, searchParams);
         for (const prop in value) {
-          searchParams.set(
-            key.toString() + "[" + prop.toString() + "]",
-            value[prop]
-          );
+          const itemKey = key.toString() + "[" + prop.toString() + "]";
+          query[itemKey] = value[prop];
         }
       } else {
-        searchParams.set(key, value);
+        query[key] = value;
       }
     }
+
+    return query;
   }
 
   /**
@@ -96,7 +96,7 @@ export default class WooCommerceRestApi {
       return url;
     }
 
-    const query = new URL(url).searchParams;
+    const query = new Url(url, null, true).query;
     const values = [];
 
     let queryString = "";
@@ -104,9 +104,9 @@ export default class WooCommerceRestApi {
     // Include params object into URL.searchParams.
     this._parseParamsObject(params, query);
 
-    query.forEach((value, key) => {
+    for (const key in query) {
       values.push(key);
-    });
+    }
     values.sort();
 
     for (const i in values) {
@@ -118,7 +118,7 @@ export default class WooCommerceRestApi {
         .replace(/%5B/g, "[")
         .replace(/%5D/g, "]");
       queryString += "=";
-      queryString += encodeURIComponent(query.get(values[i]));
+      queryString += encodeURIComponent(query[values[i]]);
     }
 
     return url.split("?")[0] + "?" + queryString;
@@ -141,7 +141,7 @@ export default class WooCommerceRestApi {
 
     // Include port.
     if (this.port !== "") {
-      const hostname = new URL(url).hostname;
+      const hostname = new Url(url).hostname;
 
       url = url.replace(hostname, hostname + ":" + this.port);
     }
