@@ -56,7 +56,7 @@ export default class WooCommerceRestApi {
     this.queryStringAuth = opt.queryStringAuth || false;
     this.port = opt.port || "";
     this.timeout = opt.timeout;
-    this.axiosOptions = opt.axiosOptions || {};
+    this.axiosConfig = opt.axiosConfig || {};
   }
 
   /**
@@ -231,7 +231,7 @@ export default class WooCommerceRestApi {
     }
 
     // Allow set and override Axios options.
-    options = { ...options, ...this.axiosOptions };
+    options = { ...options, ...this.axiosConfig };
 
     return axios(options);
   }
