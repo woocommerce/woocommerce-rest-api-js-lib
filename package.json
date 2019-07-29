@@ -1,7 +1,7 @@
 {
   "name": "@woocommerce/woocommerce-rest-api",
   "version": "0.0.1",
-  "description": "WooCommerce REST API - JavaScript Library.",
+  "description": "WooCommerce REST API - JavaScript Library",
   "author": "Automattic",
   "license": "MIT",
   "keywords": [
