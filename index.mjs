@@ -217,7 +217,7 @@ export default class WooCommerceRestApi {
       options.params = { ...options.params, ...params };
 
       if (!this.verifySsl) {
-        const options.httpsAgent = new https.Agent({  
+        options.httpsAgent = new https.Agent({  
           rejectUnauthorized: false
         });
       }
