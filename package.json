@@ -29,7 +29,7 @@
     "create-hmac": "^1.1.7",
     "oauth-1.0a": "^2.2.6",
     "url-parse": "^1.4.7",
-    "https": "^1.0.0",
+    "https": "^1.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.5.5",
