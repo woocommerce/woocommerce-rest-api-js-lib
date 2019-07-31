@@ -4,6 +4,7 @@ import axios from "axios";
 import createHmac from "create-hmac";
 import OAuth from "oauth-1.0a";
 import Url from "url-parse";
+import https from 'https';
 
 /**
  * WooCommerce REST API wrapper
@@ -216,7 +217,9 @@ export default class WooCommerceRestApi {
       options.params = { ...options.params, ...params };
 
       if (!this.verifySsl) {
-        options.strictSSL = false;
+        const options.httpsAgent = new https.Agent({  
+          rejectUnauthorized: false
+        });
       }
     } else {
       options.params = this._getOAuth().authorize({
