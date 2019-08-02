@@ -58,7 +58,6 @@ const api = new WooCommerceRestApi({
 | `consumerSecret`  | `String`  | yes      | Your API consumer secret                                                                                            |
 | `wpAPIPrefix`     | `String`  | no       | Custom WP REST API URL prefix, used to support custom prefixes created with the `rest_url_prefix` filter            |
 | `version`         | `String`  | no       | API version, default is `v3`                                                                                        |
-| `verifySsl`       | `Bool`    | no       | Verify SSL when connect, use this option as `false` when need to test with self-signed certificates                 |
 | `encoding`        | `String`  | no       | Encoding, default is 'utf-8'                                                                                        |
 | `queryStringAuth` | `Bool`    | no       | When `true` and using under HTTPS force Basic Authentication as query string, default is `false`                    |
 | `port`            | `string`  | no       | Provide support for URLs with ports, eg: `8080`                                                                     |

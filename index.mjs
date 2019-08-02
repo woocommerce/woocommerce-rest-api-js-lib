@@ -51,7 +51,6 @@ export default class WooCommerceRestApi {
     this.isHttps = /^https/i.test(this.url);
     this.consumerKey = opt.consumerKey;
     this.consumerSecret = opt.consumerSecret;
-    this.verifySsl = opt.verifySsl || true;
     this.encoding = opt.encoding || "utf8";
     this.queryStringAuth = opt.queryStringAuth || false;
     this.port = opt.port || "";
@@ -214,10 +213,6 @@ export default class WooCommerceRestApi {
       }
 
       options.params = { ...options.params, ...params };
-
-      if (!this.verifySsl) {
-        options.strictSSL = false;
-      }
     } else {
       options.params = this._getOAuth().authorize({
         url: url,
