@@ -124,7 +124,7 @@ export default class WooCommerceRestApi {
     endpoint: string,
     data: any,
     params: any
-  ): any
+  ): Promise<any>
 
   /**
    * GET requests
@@ -134,8 +134,8 @@ export default class WooCommerceRestApi {
    *
    * @return {Object}
    */
-  public get(endpoint: string): any
-  public get(endpoint: string, params: any): any
+  public get(endpoint: string): Promise<any>
+  public get(endpoint: string, params: any): Promise<any>
 
   /**
    * POST requests
@@ -146,8 +146,8 @@ export default class WooCommerceRestApi {
    *
    * @return {Object}
    */
-  public post(endpoint: string, data: any): any
-  public post(endpoint: string, data: any, params: any): any
+  public post(endpoint: string, data: any): Promise<any>
+  public post(endpoint: string, data: any, params: any): Promise<any>
 
   /**
    * PUT requests
@@ -158,8 +158,8 @@ export default class WooCommerceRestApi {
    *
    * @return {Object}
    */
-  public put(endpoint: string, data: any): any
-  public put(endpoint: string, data: any, params: any): any
+  public put(endpoint: string, data: any): Promise<any>
+  public put(endpoint: string, data: any, params: any): Promise<any>
 
   /**
    * DELETE requests
@@ -170,8 +170,8 @@ export default class WooCommerceRestApi {
    *
    * @return {Object}
    */
-  public delete(endpoint: string): any
-  public delete(endpoint: string, params: any): any
+  public delete(endpoint: string): Promise<any>
+  public delete(endpoint: string, params: any): Promise<any>
 
   /**
    * OPTIONS requests
@@ -181,8 +181,8 @@ export default class WooCommerceRestApi {
    *
    * @return {Object}
    */
-  public options(endpoint: string): any
-  public options(endpoint: string, params: any): any
+  public options(endpoint: string): Promise<any>
+  public options(endpoint: string, params: any): Promise<any>
 }
 
 /**
