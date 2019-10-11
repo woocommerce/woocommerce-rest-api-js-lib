@@ -1,17 +1,14 @@
-import axios from 'axios'
-import createHmac from 'create-hmac'
-import OAuth from 'oauth-1.0a'
-import Url from 'url-parse'
+import * as OAuth from 'oauth-1.0a'
 
-export type WooCommerceRestApiVersion =
+export declare type WooCommerceRestApiVersion =
   | 'wc/v3'
   | 'wc/v2'
   | 'wc/v1'
   | 'wc-api/v3'
   | 'wc-api/v2'
   | 'wc-api/v1'
-export type WooCommerceRestApiEncoding = 'utf-8' | 'ascii'
-export type WooCommerceRestApiMethod =
+export declare type WooCommerceRestApiEncoding = 'utf-8' | 'ascii'
+export declare type WooCommerceRestApiMethod =
   | 'get'
   | 'post'
   | 'put'
@@ -50,7 +47,7 @@ export interface IWooCommerceRestApiQuery {
  *
  * @param {Object} opt
  */
-export class WooCommerceRestApi {
+export default class WooCommerceRestApi {
   protected classVersion: string
   protected url: string
   protected consumerKey: string
@@ -202,5 +199,3 @@ export class OptionsException {
    */
   constructor(message: string)
 }
-
-export default WooCommerceRestApi
