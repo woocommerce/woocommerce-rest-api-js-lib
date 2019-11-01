@@ -191,11 +191,7 @@ export default class WooCommerceRestApi {
       Accept: "application/json"
     };
     // only set "User-Agent" in node environment
-    // the checking method is identical to upstream axios
-    if (
-      typeof process !== "undefined" &&
-      Object.prototype.toString.call(process) === "[object process]"
-    ) {
+    if (typeof window === "undefined") {
       headers["User-Agent"] =
         "WooCommerce REST API - JS Client/" + this.classVersion;
     }
