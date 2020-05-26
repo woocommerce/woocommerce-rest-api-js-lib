@@ -14,10 +14,10 @@
   "homepage": "https://github.com/woocommerce/woocommerce-rest-api-js-lib",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/woocommerce/woocommerce-rest-api-js.git"
+    "url": "git+https://github.com/woocommerce/woocommerce-rest-api-js-lib.git"
   },
   "bugs": {
-    "url": "https://github.com/woocommerce/woocommerce-rest-api-js/issues"
+    "url": "https://github.com/woocommerce/woocommerce-rest-api-js-lib/issues"
   },
   "main": "index",
   "types": "index.d.ts",
