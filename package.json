@@ -21,6 +21,10 @@
   },
   "main": "index",
   "types": "index.d.ts",
+  "exports": {
+    "import": "./index.mjs",
+    "require": "./index.js"
+  },
   "files": [
     "index.js",
     "index.mjs",
