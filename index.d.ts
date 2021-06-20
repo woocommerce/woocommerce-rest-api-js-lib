@@ -1,4 +1,5 @@
 import * as OAuth from 'oauth-1.0a'
+import {AxiosInstance} from "axios";
 
 export declare type WooCommerceRestApiVersion =
   | 'wc/v3'
@@ -36,6 +37,8 @@ export interface IWooCommerceRestApiOptions {
   timeout?: number
   /* Define the custom Axios config, also override this library options */
   axiosConfig?: any
+  /* Define own axios instance which will be used, instead of use the default global static instance */
+  axiosInstance?: AxiosInstance
 }
 
 export interface IWooCommerceRestApiQuery {
