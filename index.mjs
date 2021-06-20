@@ -56,6 +56,7 @@ export default class WooCommerceRestApi {
     this.port = opt.port || "";
     this.timeout = opt.timeout;
     this.axiosConfig = opt.axiosConfig || {};
+    this.axiosInstance = opt.axiosInstance || axios;
   }
 
   /**
@@ -238,7 +239,7 @@ export default class WooCommerceRestApi {
     // Allow set and override Axios options.
     options = { ...options, ...this.axiosConfig };
 
-    return axios(options);
+    return this.axiosInstance.request(options);
   }
 
   /**
