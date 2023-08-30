@@ -1,25 +1,26 @@
 {
   "env": {
-    "es6": true
+    "browser": true,
+    "es2017": true,
+    "node": true
   },
   "extends": [
-    "standard",
-    "prettier",
-    "plugin:jest/recommended"
+    "eslint:recommended",
+    "plugin:jest/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
   ],
+  "plugins": ["@typescript-eslint"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
   "parserOptions": {
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2017,
     "sourceType": "module"
   },
   "rules": {
-    "indent": [
-      2,
-      2
-    ],
+    "indent": [2, 2],
     "object-shorthand": "off"
   }
 }

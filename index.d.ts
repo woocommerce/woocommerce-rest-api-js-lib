@@ -1,4 +1,4 @@
-import * as OAuth from 'oauth-1.0a'
+import OAuth from 'oauth-1.0a'
 
 export declare type WooCommerceRestApiVersion =
   | 'wc/v3'
@@ -123,7 +123,7 @@ export default class WooCommerceRestApi {
     method: WooCommerceRestApiMethod,
     endpoint: string,
     data: any,
-    params: any
+    params: any,
   ): Promise<any>
 
   /**
