@@ -10,7 +10,7 @@ describe("#options", () => {
       consumerKey: "ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
       consumerSecret: "cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
       wpAPIPrefix: "wp-rest",
-      version: "wc/v3"
+      version: "wc/v3",
     });
 
     const endpoint = "products";
@@ -26,7 +26,7 @@ describe("#methods", () => {
     url: "https://test.dev",
     consumerKey: "ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     consumerSecret: "cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    version: "wc/v3"
+    version: "wc/v3",
   });
 
   test("_getUrl should return full endpoint URL", () => {
@@ -57,58 +57,50 @@ describe("#requests", () => {
     url: "https://test.dev",
     consumerKey: "ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     consumerSecret: "cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    version: "wc/v3"
+    version: "wc/v3",
   });
 
   test("should return content for basic auth", () => {
     expect.assertions(1);
 
-    nock("https://test.dev/wp-json/wc/v3")
-      .post("/orders", {})
-      .reply(201, {
-        ok: true
-      });
+    nock("https://test.dev/wp-json/wc/v3").post("/orders", {}).reply(201, {
+      ok: true,
+    });
 
-    return api.post("orders", {}).then(response => {
+    return api.post("orders", {}).then((response) => {
       expect(response.status).toBe(201);
     });
   });
 
   test("should return content for get requests", () => {
     expect.assertions(1);
-    nock("https://test.dev/wp-json/wc/v3")
-      .get("/orders")
-      .reply(200, {
-        ok: true
-      });
+    nock("https://test.dev/wp-json/wc/v3").get("/orders").reply(200, {
+      ok: true,
+    });
 
-    return api.get("orders", {}).then(response => {
+    return api.get("orders", {}).then((response) => {
       expect(response.status).toBe(200);
     });
   });
 
   test("should return content for put requests", () => {
     expect.assertions(1);
-    nock("https://test.dev/wp-json/wc/v3")
-      .put("/orders")
-      .reply(200, {
-        ok: true
-      });
+    nock("https://test.dev/wp-json/wc/v3").put("/orders").reply(200, {
+      ok: true,
+    });
 
-    return api.put("orders", {}).then(response => {
+    return api.put("orders", {}).then((response) => {
       expect(response.status).toBe(200);
     });
   });
 
   test("should return content for delete requests", () => {
     expect.assertions(1);
-    nock("https://test.dev/wp-json/wc/v3")
-      .delete("/orders")
-      .reply(200, {
-        ok: true
-      });
+    nock("https://test.dev/wp-json/wc/v3").delete("/orders").reply(200, {
+      ok: true,
+    });
 
-    return api.delete("orders", {}).then(response => {
+    return api.delete("orders", {}).then((response) => {
       expect(response.status).toBe(200);
     });
   });
@@ -118,10 +110,10 @@ describe("#requests", () => {
     nock("https://test.dev/wp-json/wc/v3")
       .intercept("/orders", "OPTIONS")
       .reply(200, {
-        ok: true
+        ok: true,
       });
 
-    return api.options("orders", {}).then(response => {
+    return api.options("orders", {}).then((response) => {
       expect(response.status).toBe(200);
     });
   });
@@ -132,17 +124,17 @@ describe("#requests", () => {
       url: "http://test.dev",
       consumerKey: "ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
       consumerSecret: "cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-      version: "wc/v3"
+      version: "wc/v3",
     });
 
     nock("http://test.dev/wp-json/wc/v3")
       .filteringPath(/\?.*/, "?params")
       .get("/orders?params")
       .reply(200, {
-        ok: true
+        ok: true,
       });
 
-    return oAuth.get("orders", {}).then(response => {
+    return oAuth.get("orders", {}).then((response) => {
       expect(response.status).toBe(200);
     });
   });

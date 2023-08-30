@@ -4,12 +4,10 @@
       "@babel/preset-env",
       {
         "targets": {
-          "node": "8"
+          "node": "14"
         }
       }
     ]
   ],
-  "plugins": [
-    "@babel/plugin-transform-modules-commonjs"
-  ]
+  "plugins": ["@babel/plugin-transform-modules-commonjs"]
 }

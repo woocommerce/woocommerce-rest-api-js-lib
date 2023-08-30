@@ -1,9 +1,8 @@
 "use strict";
 
 import axios from "axios";
-import createHmac from "create-hmac";
+import { createHmac } from "crypto";
 import OAuth from "oauth-1.0a";
-import Url from "url-parse";
 
 /**
  * WooCommerce REST API wrapper
@@ -95,32 +94,28 @@ export default class WooCommerceRestApi {
       return url;
     }
 
-    const query = new Url(url, null, true).query;
-    const values = [];
-
-    let queryString = "";
+    const parsedUrl = new URL(url);
+    const searchParams = parsedUrl.searchParams;
 
     // Include params object into URL.searchParams.
-    this._parseParamsObject(params, query);
+    this._parseParamsObject(params, searchParams);
 
-    for (const key in query) {
-      values.push(key);
-    }
+    const values = Array.from(searchParams.keys());
     values.sort();
 
-    for (const i in values) {
-      if (queryString.length) {
-        queryString += "&";
-      }
+    const queryStringParts = [];
 
-      queryString += encodeURIComponent(values[i])
-        .replace(/%5B/g, "[")
-        .replace(/%5D/g, "]");
-      queryString += "=";
-      queryString += encodeURIComponent(query[values[i]]);
+    for (const key of values) {
+      queryStringParts.push(
+        encodeURIComponent(key).replace(/%5B/g, "[").replace(/%5D/g, "]") +
+          "=" +
+          encodeURIComponent(searchParams.get(key)),
+      );
     }
 
-    return url.split("?")[0] + "?" + queryString;
+    return (
+      parsedUrl.origin + parsedUrl.pathname + "?" + queryStringParts.join("&")
+    );
   }
 
   /**
@@ -133,16 +128,14 @@ export default class WooCommerceRestApi {
    */
   _getUrl(endpoint, params) {
     const api = this.wpAPIPrefix + "/";
-
-    let url = this.url.slice(-1) === "/" ? this.url : this.url + "/";
-
+    let url = this.url.endsWith("/") ? this.url : this.url + "/";
     url = url + api + this.version + "/" + endpoint;
 
     // Include port.
     if (this.port !== "") {
-      const hostname = new Url(url).hostname;
-
-      url = url.replace(hostname, hostname + ":" + this.port);
+      const parsedUrl = new URL(url);
+      parsedUrl.port = this.port;
+      url = parsedUrl.toString();
     }
 
     if (!this.isHttps) {
@@ -161,14 +154,12 @@ export default class WooCommerceRestApi {
     const data = {
       consumer: {
         key: this.consumerKey,
-        secret: this.consumerSecret
+        secret: this.consumerSecret,
       },
       signature_method: "HMAC-SHA256",
       hash_function: (base, key) => {
-        return createHmac("sha256", key)
-          .update(base)
-          .digest("base64");
-      }
+        return createHmac("sha256", key).update(base).digest("base64");
+      },
     };
 
     return new OAuth(data);
@@ -188,7 +179,7 @@ export default class WooCommerceRestApi {
     const url = this._getUrl(endpoint, params);
 
     const headers = {
-      Accept: "application/json"
+      Accept: "application/json",
     };
     // only set "User-Agent" in node environment
     // the checking method is identical to upstream axios
@@ -206,19 +197,19 @@ export default class WooCommerceRestApi {
       responseEncoding: this.encoding,
       timeout: this.timeout,
       responseType: "json",
-      headers
+      headers,
     };
 
     if (this.isHttps) {
       if (this.queryStringAuth) {
         options.params = {
           consumer_key: this.consumerKey,
-          consumer_secret: this.consumerSecret
+          consumer_secret: this.consumerSecret,
         };
       } else {
         options.auth = {
           username: this.consumerKey,
-          password: this.consumerSecret
+          password: this.consumerSecret,
         };
       }
 
@@ -226,7 +217,7 @@ export default class WooCommerceRestApi {
     } else {
       options.params = this._getOAuth().authorize({
         url: url,
-        method: method
+        method: method,
       });
     }
 
