@@ -21,6 +21,7 @@
   },
   "rules": {
     "indent": [2, 2],
-    "object-shorthand": "off"
+    "object-shorthand": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }
