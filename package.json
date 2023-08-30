@@ -1,6 +1,6 @@
 {
-  "name": "@woocommerce/woocommerce-rest-api",
-  "version": "1.0.1",
+  "name": "@highlandertech/woocommerce-rest-api",
+  "version": "1.0.0",
   "description": "WooCommerce REST API - JavaScript Library",
   "author": "Automattic",
   "license": "MIT",
@@ -11,13 +11,13 @@
     "promise",
     "node"
   ],
-  "homepage": "https://github.com/woocommerce/woocommerce-rest-api-js-lib",
+  "homepage": "https://github.com/giovanifranz/woocommerce-rest-api-js-lib",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/woocommerce/woocommerce-rest-api-js-lib.git"
+    "url": "git+https://github.com/giovanifranz/woocommerce-rest-api-js-lib"
   },
   "bugs": {
-    "url": "https://github.com/woocommerce/woocommerce-rest-api-js-lib/issues"
+    "url": "https://github.com/giovanifranz/woocommerce-rest-api-js-lib/issues"
   },
   "main": "index.js",
   "module": "index.mjs",
@@ -63,11 +63,7 @@
     "test": "npm run build && jest",
     "format": "prettier --write \"*.mjs\" \"test.js\"",
     "lint": "eslint *.mjs",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A",
-    "postversion": "git push && git push --tags"
+    "prepare": "npm run build"
   },
   "husky": {
     "hooks": {
