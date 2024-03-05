@@ -17,10 +17,6 @@ export default class WooCommerceRestApi {
    * @param {Object} opt
    */
   constructor(opt) {
-    if (!(this instanceof WooCommerceRestApi)) {
-      return new WooCommerceRestApi(opt);
-    }
-
     opt = opt || {};
 
     if (!opt.url) {
