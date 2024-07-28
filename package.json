@@ -1,83 +1,70 @@
 {
-  "name": "@woocommerce/woocommerce-rest-api",
-  "version": "1.0.1",
-  "description": "WooCommerce REST API - JavaScript Library",
-  "author": "Automattic",
-  "license": "MIT",
-  "keywords": [
-    "wordpress",
-    "woocommerce",
-    "rest",
-    "promise",
-    "node"
-  ],
-  "homepage": "https://github.com/woocommerce/woocommerce-rest-api-js-lib",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/woocommerce/woocommerce-rest-api-js-lib.git"
-  },
-  "bugs": {
-    "url": "https://github.com/woocommerce/woocommerce-rest-api-js-lib/issues"
-  },
-  "main": "index",
-  "types": "index.d.ts",
-  "files": [
-    "index.js",
-    "index.mjs",
-    "index.d.ts"
-  ],
-  "dependencies": {
-    "axios": "^1.6.0",
-    "create-hmac": "^1.1.7",
-    "oauth-1.0a": "^2.2.6",
-    "url-parse": "^1.4.7"
-  },
-  "devDependencies": {
-    "@babel/cli": "7.6.0",
-    "@babel/core": "7.6.0",
-    "@babel/plugin-transform-modules-commonjs": "7.6.0",
-    "@babel/preset-env": "7.6.0",
-    "babel-jest": "24.9.0",
-    "del-cli": "3.0.0",
-    "eslint": "6.4.0",
-    "eslint-config-prettier": "6.3.0",
-    "eslint-config-standard": "14.1.0",
-    "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-jest": "22.17.0",
-    "eslint-plugin-node": "10.0.0",
-    "eslint-plugin-prettier": "3.1.1",
-    "eslint-plugin-promise": "4.2.1",
-    "eslint-plugin-standard": "4.0.1",
-    "husky": "3.0.5",
-    "jest": "24.9.0",
-    "lint-staged": "9.3.0",
-    "nock": "11.3.5",
-    "prettier": "1.18.2"
-  },
-  "scripts": {
-    "build": "del index.js && babel index.mjs --out-dir .",
-    "test": "jest",
-    "format": "prettier --write \"*.mjs\" \"test.js\"",
-    "lint": "eslint *.mjs",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A",
-    "postversion": "git push && git push --tags"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,mjs}": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "engines": {
-    "node": ">=8.0.0"
-  }
+	"name": "@woocommerce/woocommerce-rest-api",
+	"version": "1.0.1",
+	"description": "WooCommerce REST API - JavaScript Library",
+	"author": "Automattic",
+	"license": "MIT",
+	"keywords": ["wordpress", "woocommerce", "rest", "promise", "node"],
+	"homepage": "https://github.com/woocommerce/woocommerce-rest-api-js-lib",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/woocommerce/woocommerce-rest-api-js-lib.git"
+	},
+	"bugs": {
+		"url": "https://github.com/woocommerce/woocommerce-rest-api-js-lib/issues"
+	},
+	"main": "index",
+	"types": "index.d.ts",
+	"files": ["index.js", "index.mjs", "index.d.ts"],
+
+	"dependencies": {
+		"axios": "",
+		"create-hmac": "",
+		"oauth-1.0a": "",
+		"url-parse": ""
+	},
+	"devDependencies": {
+		"@babel/cli": "",
+		"@babel/core": "",
+		"@babel/plugin-transform-modules-commonjs": "",
+		"@babel/preset-env": "",
+		"babel-jest": "",
+		"del-cli": "",
+		"eslint": "",
+		"eslint-config-prettier": "",
+		"eslint-config-standard": "",
+		"eslint-plugin-import": "",
+		"eslint-plugin-jest": "",
+		"eslint-plugin-node": "",
+		"eslint-plugin-prettier": "",
+		"eslint-plugin-promise": "",
+		"eslint-plugin-standard": "",
+		"husky": "",
+		"jest": "",
+		"lint-staged": "",
+		"nock": "",
+		"prettier": ""
+	},
+	"scripts": {
+		"build": "del index.js && babel index.mjs --out-dir .",
+		"test": "jest",
+		"format": "prettier --write \"*.mjs\" \"test.js\"",
+		"lint": "eslint *.mjs",
+		"prepare": "npm run build",
+		"prepublishOnly": "npm test && npm run lint",
+		"preversion": "npm run lint",
+		"version": "npm run format && git add -A",
+		"postversion": "git push && git push --tags"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{js,mjs}": ["eslint --fix", "prettier --write", "git add"]
+	},
+	"engines": {
+		"node": ">=8.0.0"
+	}
 }
