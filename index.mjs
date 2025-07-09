@@ -35,7 +35,7 @@ export default class WooCommerceRestApi {
       throw new OptionsException("consumerSecret is required");
     }
 
-    this.classVersion = "1.0.1";
+    this.classVersion = "1.0.2";
     this._setDefaultsOptions(opt);
   }
 
