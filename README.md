@@ -4,8 +4,6 @@ New JavaScript library for WooCommerce REST API, supports CommonJS (CJS) and Emb
 
 Requests are made with [Axios library](https://github.com/axios/axios) with [support to promises](https://github.com/axios/axios#promises).
 
-[![build status](https://secure.travis-ci.org/woocommerce/woocommerce-rest-api-js-lib.svg)](http://travis-ci.org/woocommerce/woocommerce-rest-api-js-lib)
-[![dependency status](https://david-dm.org/woocommerce/woocommerce-rest-api-js-lib.svg)](https://david-dm.org/woocommerce/woocommerce-rest-api-js-lib)
 [![npm version](https://img.shields.io/npm/v/@woocommerce/woocommerce-rest-api.svg)](https://www.npmjs.com/package/@woocommerce/woocommerce-rest-api)
 
 ## Installation
