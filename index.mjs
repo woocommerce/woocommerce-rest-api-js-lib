@@ -232,7 +232,6 @@ export default class WooCommerceRestApi {
 
     if (data) {
       options.headers["Content-Type"] = "application/json;charset=utf-8";
-      options.data = JSON.stringify(data);
     }
 
     // Allow set and override Axios options.
