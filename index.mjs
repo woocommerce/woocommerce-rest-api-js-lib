@@ -95,7 +95,7 @@ export default class WooCommerceRestApi {
       return url;
     }
 
-    const query = new Url(url, null, true).query;
+    const query = new Url(url, {}, true).query;
     const values = [];
 
     let queryString = "";
@@ -140,7 +140,7 @@ export default class WooCommerceRestApi {
 
     // Include port.
     if (this.port !== "") {
-      const hostname = new Url(url).hostname;
+      const hostname = new Url(url, {}).hostname;
 
       url = url.replace(hostname, hostname + ":" + this.port);
     }
