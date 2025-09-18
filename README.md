@@ -1,5 +1,10 @@
 # WooCommerce REST API - JavaScript Library
 
+---
+## This library may not receive any new updates as it is being replaced with: https://www.npmjs.com/package/@woocommerce/api
+---
+
+
 New JavaScript library for WooCommerce REST API, supports CommonJS (CJS) and Embedded System Module (ESM).
 
 Requests are made with [Axios library](https://github.com/axios/axios) with [support to promises](https://github.com/axios/axios#promises).
